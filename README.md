@@ -94,7 +94,102 @@ Feature<br>
 >FeatureMatrixWithNPW    <br>
 >FeatureMatrixWithNPWRelation    <br>
 
+###开放社会媒体数据集处理
+封闭的带表情符号数据集合，数量是 1915200    <br>
+先以表情符号选择推特数据集，然后统计数据集中的用户已经被@用户，再将该用户发布的推特合并过
+来  <br>
+封闭数据集：all_asc_tweetsOutput/filterData/EmocCloseData <br>
+****
+
+####根据需求过滤数据：
 
 
+FilterData/fitlerData.py    <br>
+    根据需求过滤数据,得到带表情符号的数据，以及通过带表情符号得到封闭数据集    <br>
+    输出： <br>
+>all_asc_tweetsOutput/filterEmocData 含有表情符号的数据集 1208266条tweets   <br>
+>all_asc_tweetsOutput/EmocCloseData 封闭数据集  1915200条tweets    <br>
+
+####HashTag 筛选话题
+statHashTag.py     <br>
+    输出：
+>all_asc_tweetsOutput/HashTagStat HashTag统计信息 <br>
+>手工过滤，筛选20个话题 all_asc_tweetsOutput/topicData/   <br>
 
 
+    话题名称  | 微博数量    |话题名称 | 微博数量
+    ------------- | -------------   |   ------------- | -------------
+    BieberD3D     | 857 | DamnItsTrue     | 608
+    Egypt         | 2148    |   Superbowl         | 2344
+    MentionKe     | 3749   |   shoutout   | 2933
+    NEVERSAYNEVER3D       | 896 |   icantdateyou          | 667
+    TeamFollowBack        | 1495    |   fb        | 820
+    Twitition     | 1467    |     februarywish    | 739
+    cumanNANYA    | 1425    |  Ff         | 5231
+    improudtosay          | 563 |    pickone      | 643
+    jfb   | 1560    |   purpleglasses     | 744
+    nowplaying    | 5888    |   nw        | 669
+
+####HashTag 人工标注数据
+humanLabel.py     <br>
+    将EmocCloseData中带表情符号的数据进行正／负标注，然后输出需要人工标注的数据 <br>
+>输入:
+>>封闭的数据集：all_asc_tweetsOutput/filterData/EmocCloseData  <br>
+
+>输出:    <br>
+>>已经按照正负标注好的数据：all_asc_tweetsOutput/filterData/HumanLabel/EmocCloseDataLabel    <br>
+>>需要人工标注的数据：all_asc_tweetsOutput/filterData/HumanLabel/humanLabelContent  <br>
+>>需要人工标注的数据的位置，tweetId：all_asc_tweetsOutput/filterData/HumanLabel/humanLabelNumber    <br>
+
+进行人工标注数据：   <br>
+>输出：
+>>all中对百万级数据的中对百万级数据的_asc_tweetsOutput/filterData/HumanLabel/humanLabel500    <br>
+
+
+mergeHumanLabel.py     <br>
+合并人工标注的数据HumanLabel/humanLabel500 和 通过表情符号标注的数据HumanLabel/EmocCloseDataLabel    <br>
+>输入：   <br>
+>>已正负标注好的数据：all_asc_tweetsOutput/filterData/HumanLabel/EmocCloseDataLabel   <br>
+>>人工标注的数据：all_asc_tweetsOutput/filterData/HumanLabel/humanLabel500    <br>
+>>人工标注数据对应的位置：all_asc_tweetsOutput/filterData/HumanLabel/humanLabelNumber <br>
+
+>输出：
+>>合并的数据标注：all_asc_tweetsOutput/filterData/HumanLabel/mergedLabel    <br>
+>>合并的数据标注情感：all_asc_tweetsOutput/filterData/HumanLabel/mergedSentiment   <br>
+
+>统计 mergeLabel中正类／负类的数据量比例   <br>
+
+        情感倾向  | 微博数量
+        ------------- | -------------
+        正类      | 994822
+        负类      | 119763
+        标注的中性数据    | 100
+
+>注意类别标注： <br>
+   
+        类别  | 类别标注
+        ------------- | -------------
+        positive          | 1
+        neutral   | 0
+        negative          | －1
+        unknown   | 2
+   
+   
+#### 处理混合数据
+divide.py     <br>
+    删除掉输出的sentiment 和 label, 因为已经之前有标注好的    <br>
+>ProcessingData/PreprocessandgetFrequency.py:    <br>
+>SentimentDiffusion/checkposrelation.py: <br>
+>RelationProcess/relationsentiment.py:   <br>
+>StatisticData/allusersametweetvar.py   <br>
+>StatisticData/check@relationsentiment.py <br>
+>StatisticData/checkhyperlinkgraph.py   <br>
+>StatisticData/getEachAuthorSentiemnt.py     <br>
+>FeatureProcess/getRelationAtt.py : 根据tweetrelation得到relation feature （parent，child）    <br>
+
+#### 处理某个话题领域的话题相关情感词
+allTweetsPreprocess/divide.py  <br>
+ProcessingData/PreprocessandgetFrequency.py  <br>
+SentimentDiffusion/checkposrelation.py  <br>
+RelationProcess/relationsentiment.py  <br>
+FeatureProces/getRelationAtt.py  <br>

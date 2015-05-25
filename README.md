@@ -6,6 +6,8 @@ TASC-FeatureExtraction repository包含针对社会媒体数据集抽取特征�
 
 ##目录结构及文件介绍
 
+###feature extraction for weka version
+
 Dictionary<br>
 1）主要包含了两个公共情感词库：hownet和wordnet<br>
 2）由PMI-IR计算共现次数，得到的hownetPMI值和wordnetPMI<br>

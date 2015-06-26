@@ -1,12 +1,13 @@
-# TASC-FeatureExtraction
+TASC-FeatureExtraction
+===============================================
 
 TASC-FeatureExtraction repository包含针对社会媒体数据集抽取特征的过程<br>
 
 代码包含了两部分，其中一部分描述了从社会媒体数据中提取文本特征以及非文本特征的基本流程，第二部分描述了针对开放社会媒体数据处理的具体处理流程。<br>
 
-##目录结构及文件介绍
+## 目录结构及文件介绍 <br />
 
-###feature extraction for weka version
+### feature extraction for weka version <br />
 
 Dictionary<br>
 1）主要包含了两个公共情感词库：hownet和wordnet<br>
@@ -94,14 +95,14 @@ Feature<br>
 >FeatureMatrixWithNPW    <br>
 >FeatureMatrixWithNPWRelation    <br>
 
-###开放社会媒体数据集处理
+### 开放社会媒体数据集处理 <br />
 封闭的带表情符号数据集合，数量是 1915200    <br>
 先以表情符号选择推特数据集，然后统计数据集中的用户已经被@用户，再将该用户发布的推特合并过
 来  <br>
 封闭数据集：all_asc_tweetsOutput/filterData/EmocCloseData <br>
 ****
 
-####根据需求过滤数据：
+#### 根据需求过滤数据： <br />
 
 
 FilterData/fitlerData.py    <br>
@@ -110,7 +111,7 @@ FilterData/fitlerData.py    <br>
 >all_asc_tweetsOutput/filterEmocData 含有表情符号的数据集 1208266条tweets   <br>
 >all_asc_tweetsOutput/EmocCloseData 封闭数据集  1915200条tweets    <br>
 
-####HashTag 筛选话题
+#### HashTag 筛选话题 <br />
 statHashTag.py     <br>
     输出：
 >all_asc_tweetsOutput/HashTagStat HashTag统计信息 <br>
@@ -130,7 +131,7 @@ statHashTag.py     <br>
     jfb   | 1560    |   purpleglasses     | 744
     nowplaying    | 5888    |   nw        | 669
 
-####HashTag 人工标注数据
+#### HashTag 人工标注数据 <br />
 humanLabel.py     <br>
     将EmocCloseData中带表情符号的数据进行正／负标注，然后输出需要人工标注的数据 <br>
 >输入:
@@ -174,8 +175,7 @@ mergeHumanLabel.py     <br>
         negative          | －1
         unknown   | 2
    
-   
-#### 处理混合数据
+#### 处理混合数据 <br />
 divide.py     <br>
     删除掉输出的sentiment 和 label, 因为已经之前有标注好的    <br>
 >ProcessingData/PreprocessandgetFrequency.py:    <br>
@@ -187,7 +187,7 @@ divide.py     <br>
 >StatisticData/getEachAuthorSentiemnt.py     <br>
 >FeatureProcess/getRelationAtt.py : 根据tweetrelation得到relation feature （parent，child）    <br>
 
-#### 处理某个话题领域的话题相关情感词
+#### 处理某个话题领域的话题相关情感词 <br />
 allTweetsPreprocess/divide.py  <br>
 ProcessingData/PreprocessandgetFrequency.py  <br>
 SentimentDiffusion/checkposrelation.py  <br>
